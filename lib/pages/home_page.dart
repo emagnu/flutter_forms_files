@@ -16,7 +16,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // String _email = '';
-  final TextEditingController _emailController = TextEditingController();
+  // final TextEditingController _emailController = TextEditingController();
+  final _formGlobalKey = GlobalKey();
 
   // Moved to /data/todo_list.dart
   //  final List<Todo> todos = [
@@ -49,28 +50,60 @@ class _HomePageState extends State<HomePage> {
             Expanded(child: TodoList(todos: todos)),
 
             // form stuff below here
-            TextField(
-              controller: _emailController,
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                labelText: 'Email Address',
-                border: OutlineInputBorder(),
-              ),
-              // onChanged: (value) {
-              //   debugPrint(value);
-              //   setState(() {
-              //     _email = value;
-              //   });
-              // },
-            ),
+            Form(
+                key: _formGlobalKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    // Todo title
+                    // TextFormField(
+                    //   decoration: const InputDecoration(
+                    //     labelText: 'Title',
+                    //     border: OutlineInputBorder(),
+                    //   ),
+                    // ),
+                    // Todo description
+                    // Priority
+                    // Submit button
+                    const SizedBox(height: 20),
+                    FilledButton(
+                      onPressed: () {
+                        debugPrint("Form");
+                      },
+                      style: FilledButton.styleFrom(
+                        alignment: Alignment.center,
+                        backgroundColor: Colors.grey[800],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      ),
+                      child: const Text('Add'),
+                    ),
+                  ],
+                ))
+
+            // TextField(
+            //   controller: _emailController,
+            //   keyboardType: TextInputType.emailAddress,
+            //   decoration: const InputDecoration(
+            //     labelText: 'Email Address',
+            //     border: OutlineInputBorder(),
+            //   ),
+            //   // onChanged: (value) {
+            //   //   debugPrint(value);
+            //   //   setState(() {
+            //   //     _email = value;
+            //   //   });
+            //   // },
+            // ),
+            // // const SizedBox(height: 20),
+            // // Text('Your Email is: $_email'),
             // const SizedBox(height: 20),
-            // Text('Your Email is: $_email'),
-            const SizedBox(height: 20),
-            FilledButton(
-                onPressed: () {
-                  debugPrint(_emailController.text);
-                },
-                child: const Text('Print the email'))
+            // FilledButton(
+            //     onPressed: () {
+            //       debugPrint(_emailController.text.trim());
+            //     },
+            //     child: const Text('Print the email'))
           ],
         ),
       ),
