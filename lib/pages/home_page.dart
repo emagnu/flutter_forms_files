@@ -15,25 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // String _email = '';
-  // final TextEditingController _emailController = TextEditingController();
-  final _formGlobalKey = GlobalKey();
-
-  // Moved to /data/todo_list.dart
-  //  final List<Todo> todos = [
-  //   const Todo(
-  //       title: 'Buy milk',
-  //       description: 'There is no milk left in the fridge!',
-  //       priority: Priority.high),
-  //   const Todo(
-  //       title: 'Make the bed',
-  //       description: 'Keep things tidy please..',
-  //       priority: Priority.low),
-  //   const Todo(
-  //       title: 'Pay bills',
-  //       description: 'The gas bill needs paying ASAP.',
-  //       priority: Priority.urgent),
-  // ];
+  final GlobalKey<FormState> _formGlobalKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -56,19 +38,48 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
                     // Todo title
-                    // TextFormField(
-                    //   decoration: const InputDecoration(
-                    //     labelText: 'Title',
-                    //     border: OutlineInputBorder(),
-                    //   ),
-                    // ),
+                    TextFormField(
+                      maxLength: 20,
+                      decoration: const InputDecoration(
+                        labelText: 'Todo Title',
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a title';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        debugPrint("Title: $value");
+                      },
+                    ),
                     // Todo description
+                    TextFormField(
+                      maxLength: 40,
+                      decoration: const InputDecoration(
+                        labelText: 'Todo Description',
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (value) {
+                        if (value == null ||
+                            value.isEmpty ||
+                            value.length < 5) {
+                          return 'Enter a descritipon at least 5 characters long';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        debugPrint("Title: $value");
+                      },
+                    ),
                     // Priority
                     // Submit button
                     const SizedBox(height: 20),
                     FilledButton(
                       onPressed: () {
                         debugPrint("Form");
+                        _formGlobalKey.currentState!.validate();
                       },
                       style: FilledButton.styleFrom(
                         alignment: Alignment.center,
@@ -81,29 +92,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ))
-
-            // TextField(
-            //   controller: _emailController,
-            //   keyboardType: TextInputType.emailAddress,
-            //   decoration: const InputDecoration(
-            //     labelText: 'Email Address',
-            //     border: OutlineInputBorder(),
-            //   ),
-            //   // onChanged: (value) {
-            //   //   debugPrint(value);
-            //   //   setState(() {
-            //   //     _email = value;
-            //   //   });
-            //   // },
-            // ),
-            // // const SizedBox(height: 20),
-            // // Text('Your Email is: $_email'),
-            // const SizedBox(height: 20),
-            // FilledButton(
-            //     onPressed: () {
-            //       debugPrint(_emailController.text.trim());
-            //     },
-            //     child: const Text('Print the email'))
           ],
         ),
       ),
