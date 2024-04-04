@@ -15,7 +15,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String _email = '';
+  // String _email = '';
+  final TextEditingController _emailController = TextEditingController();
 
   // Moved to /data/todo_list.dart
   //  final List<Todo> todos = [
@@ -49,27 +50,27 @@ class _HomePageState extends State<HomePage> {
 
             // form stuff below here
             TextField(
+              controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
                 labelText: 'Email Address',
                 border: OutlineInputBorder(),
               ),
-              onChanged: (value) {
-                debugPrint(value);
-                setState(() {
-                  _email = value;
-                });
-              },
+              // onChanged: (value) {
+              //   debugPrint(value);
+              //   setState(() {
+              //     _email = value;
+              //   });
+              // },
             ),
+            // const SizedBox(height: 20),
+            // Text('Your Email is: $_email'),
             const SizedBox(height: 20),
-            Text('Your Email is: $_email'),
-            // const TextField(
-            //   keyboardType: TextInputType.text,
-            //   decoration: InputDecoration(
-            //     labelText: 'Password',
-            //     border: OutlineInputBorder(),
-            //   ),
-            // ),
+            FilledButton(
+                onPressed: () {
+                  debugPrint(_emailController.text);
+                },
+                child: const Text('Print the email'))
           ],
         ),
       ),
