@@ -2,9 +2,9 @@
 //  Import LIBRARIES
 import 'package:flutter/material.dart';
 //  Import FILES
-import '../models/todo.dart';
+import '../dats/todo_list.dart';
+// import '../models/todo.dart';
 import '../todo_list.dart';
-
 //  //   ///
 
 class HomePage extends StatefulWidget {
@@ -15,20 +15,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<Todo> todos = [
-    const Todo(
-        title: 'Buy milk',
-        description: 'There is no milk left in the fridge!',
-        priority: Priority.high),
-    const Todo(
-        title: 'Make the bed',
-        description: 'Keep things tidy please..',
-        priority: Priority.low),
-    const Todo(
-        title: 'Pay bills',
-        description: 'The gas bill needs paying ASAP.',
-        priority: Priority.urgent),
-  ];
+  String _email = '';
+
+  // Moved to /data/todo_list.dart
+  //  final List<Todo> todos = [
+  //   const Todo(
+  //       title: 'Buy milk',
+  //       description: 'There is no milk left in the fridge!',
+  //       priority: Priority.high),
+  //   const Todo(
+  //       title: 'Make the bed',
+  //       description: 'Keep things tidy please..',
+  //       priority: Priority.low),
+  //   const Todo(
+  //       title: 'Pay bills',
+  //       description: 'The gas bill needs paying ASAP.',
+  //       priority: Priority.urgent),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +48,28 @@ class _HomePageState extends State<HomePage> {
             Expanded(child: TodoList(todos: todos)),
 
             // form stuff below here
+            TextField(
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
+                labelText: 'Email Address',
+                border: OutlineInputBorder(),
+              ),
+              onChanged: (value) {
+                debugPrint(value);
+                setState(() {
+                  _email = value;
+                });
+              },
+            ),
+            const SizedBox(height: 20),
+            Text('Your Email is: $_email'),
+            // const TextField(
+            //   keyboardType: TextInputType.text,
+            //   decoration: InputDecoration(
+            //     labelText: 'Password',
+            //     border: OutlineInputBorder(),
+            //   ),
+            // ),
           ],
         ),
       ),

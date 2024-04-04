@@ -1,4 +1,8 @@
+//  //   ///
+//  Import LIBRARIES
 import 'package:flutter/material.dart';
+//  Import FILES
+//  //   ///
 
 enum Priority {
   urgent(color: Colors.red, title: 'Urgent'),
@@ -6,18 +10,17 @@ enum Priority {
   medium(color: Colors.amber, title: 'Medium'),
   low(color: Colors.green, title: 'Low');
 
-  const Priority({ required this.color, required this.title });
+  const Priority({required this.color, required this.title});
 
   final Color color;
   final String title;
 }
 
 class Todo {
-
-  const Todo({ required this.title, required this.description, required this.priority });
+  const Todo(
+      {required this.title, required this.description, required this.priority});
 
   final String title;
   final String description;
   final Priority priority;
-
 }
